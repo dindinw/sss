@@ -26,7 +26,7 @@ pidFile=./$name.pid
 getPid() {
     ### Delete spaces, tabs and newlines.
     pid=$(cat $pidFile 2>/dev/null | tr -d ' \t\n')
-    if [ "$pid" ] && [ ! "$(ps -p $pid|grep $name)" ]; then
+    if [ "$pid" ] && [ ! "$(ps -p $pid -f|grep $name)" ]; then
         rm -f $pidFile
         unset pid
     fi
@@ -39,7 +39,7 @@ doStart() {
 
     pid=$!
     for (( i=0; i<=5; i++ )); do
-        if [ "$(ps -p $pid|grep $name)" ]; then
+        if [ "$(ps -p $pid -f|grep $name)" ]; then
             echo -n '.'
             sleep 1
         else
@@ -57,7 +57,7 @@ doStop() {
     kill $pid
 
     for (( i=0; i<=10; i++ )); do
-        if [ "$(ps -p $pid|grep $name)" ]; then
+        if [ "$(ps -p $pid -f|grep $name)" ]; then
             if [ "$i" = "10" ]; then
                 echo -e "\n\033[1;31m[E]\033[0m  Stop $name failed. Try using $0 kill."
                 exit 1
