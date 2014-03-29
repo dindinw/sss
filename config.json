@@ -1,0 +1,8 @@
+{
+    "server":"server ip",
+    "server_port":server port,
+    "local_port":local port,
+    "password":"the password",
+    "timeout":600,
+    "method":"table"
+}
