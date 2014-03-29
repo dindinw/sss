@@ -25,6 +25,8 @@ linux
 
 ### configuration
 
+renamed the "config.json.template" to "config.json"
+
     {
         "server":"your_sockets_server_ip",
         "server_port":your_server_port,
